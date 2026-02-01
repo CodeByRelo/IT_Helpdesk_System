@@ -1,0 +1,22 @@
+﻿@model IT_Helpdesk_System.Models.Ticket
+@{
+    ViewData["Title"] = "Ticket Details";
+}
+
+<h2>Ticket Details</h2>
+
+<div class="card shadow-sm mb-3">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title</h5>
+        <p class="card-text">@Model.Description</p>
+
+        <p><strong>Status:</strong> @Model.Status</p>
+        <p><strong>Created By:</strong> @Model.CreatedBy?.FullName</p>
+        <p><strong>Assigned To:</strong> @Model.AssignedTo?.FullName ?? "Unassigned"</p>
+        <p><strong>Created At:</strong> @Model.CreatedAt.ToString("g")</p>
+        <p><strong>Updated At:</strong> @Model.UpdatedAt?.ToString("g")</p>
+
+        <a asp-action="Assign" asp-route-id="@Model.TicketId" class="btn btn-primary">Assign</a>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Back</a>
+    </div>
+</div>

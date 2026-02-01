@@ -1,0 +1,61 @@
+﻿@model IT_Helpdesk_System.Models.Ticket
+
+@{
+    ViewData["Title"] = "Create Request";
+}
+
+<div class="container-fluid">
+    <h1 class="mb-3 text-center fw-semibold">Create New Ticket</h1>
+    <h5 class="text-muted text-center mb-4">Submit a request to the IT Helpdesk team</h5>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm p-4 rounded">
+                <h5 class="card-title mb-4 fw-semibold">Ticket Details</h5>
+
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label fw-semibold"></label>
+                        <input asp-for="Title" class="form-control" placeholder="Enter ticket title" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label fw-semibold"></label>
+                        <textarea asp-for="Description" class="form-control" rows="4" placeholder="Describe the issue"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Status" class="form-label fw-semibold"></label>
+                        <select asp-for="Status" class="form-select">
+                            <option value="Open" selected>Open</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+
+                    <!-- Hidden timestamps -->
+                    <input type="hidden" asp-for="CreatedAt" value="@DateTime.Now" />
+                    <input type="hidden" asp-for="UpdatedAt" />
+
+                    <div class="d-flex justify-content-between">
+                        <input type="submit" value="Create" class="btn btn-primary">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <span class="material-symbols-rounded me-1">arrow_back</span> Back
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

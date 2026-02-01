@@ -1,0 +1,47 @@
+﻿@model IT_Helpdesk_System.Models.Ticket
+
+@{
+    ViewData["Title"] = "Request Details";
+}
+
+<div class="container-fluid">
+    <h1 class="mb-3 text-center fw-semibold">Request Details</h1>
+    <h5 class="text-muted text-center mb-4">View all information about this ticket</h5>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm p-4 rounded">
+                <h5 class="card-title mb-3 fw-semibold">Ticket Information</h5>
+                <dl class="row mb-4">
+                    <dt class="col-sm-4 fw-semibold">Title</dt>
+                    <dd class="col-sm-8">@Model.Title</dd>
+
+                    <dt class="col-sm-4 fw-semibold">Description</dt>
+                    <dd class="col-sm-8">@Model.Description</dd>
+
+                    <dt class="col-sm-4 fw-semibold">Status</dt>
+                    <dd class="col-sm-8">
+                        <span class="badge @(Model.Status == "Closed" ? "bg-success" : Model.Status == "In Progress" ? "bg-warning text-dark" : "bg-primary")">
+                            @Model.Status
+                        </span>
+                    </dd>
+
+                    <dt class="col-sm-4 fw-semibold">Created At</dt>
+                    <dd class="col-sm-8">@Model.CreatedAt.ToString("g")</dd>
+
+                    <dt class="col-sm-4 fw-semibold">Updated At</dt>
+                    <dd class="col-sm-8">@Model.UpdatedAt?.ToString("g")</dd>
+                </dl>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Edit" asp-route-id="@Model.TicketId" class="btn btn-outline-primary">
+                        <span class="material-symbols-rounded me-1">edit</span> Edit
+                    </a>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <span class="material-symbols-rounded me-1">arrow_back</span> Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

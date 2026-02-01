@@ -1,0 +1,69 @@
+﻿@model IEnumerable<IT_Helpdesk_System.Models.Ticket>
+
+@{
+    ViewData["Title"] = "My Requests";
+}
+
+<div class="container-fluid">
+    <h1 class="mb-4 text-center fw-semibold">My Requests</h1>
+
+    <div class="d-flex justify-content-end mb-3">
+        <a asp-action="Create" class="btn btn-primary">
+            <span class="material-symbols-rounded me-1">add_circle</span> Create New Ticket
+        </a>
+    </div>
+
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table align-middle table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>
+                            @switch (item.Status)
+                            {
+                                case "Open":
+                                    <span class="badge bg-success">@item.Status</span>
+                                    break;
+                                case "In Progress":
+                                    <span class="badge bg-warning text-dark">@item.Status</span>
+                                    break;
+                                case "Closed":
+                                    <span class="badge bg-secondary">@item.Status</span>
+                                    break;
+                                default:
+                                    <span class="badge bg-info">@item.Status</span>
+                                    break;
+                            }
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+                        <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
+                        <td class="text-center">
+                            <a asp-action="Edit" asp-route-id="@item.TicketId" class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                <span class="material-symbols-rounded">edit</span>
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.TicketId" class="btn btn-sm btn-outline-info me-1" title="Details">
+                                <span class="material-symbols-rounded">visibility</span>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.TicketId" class="btn btn-sm btn-outline-danger" title="Delete">
+                                <span class="material-symbols-rounded">delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

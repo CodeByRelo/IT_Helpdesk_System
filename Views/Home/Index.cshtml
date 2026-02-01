@@ -1,0 +1,166 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container-fluid py-5">
+    <!-- Hero Section -->
+    <section class="text-center mb-5">
+        <h1 class="display-5 fw-bold text-primary mb-3">
+            Welcome to IT Helpdesk
+        </h1>
+        <p class="lead text-muted mb-4">
+            Submit requests, track issues, and get professional IT support for your team.
+        </p>
+
+        @if (User.Identity?.IsAuthenticated ?? false)
+        {
+            <a asp-controller="Tickets" asp-action="Create" class="btn btn-primary btn-lg me-2">
+                Create New Ticket
+            </a>
+            <a asp-controller="Tickets" asp-action="Index" class="btn btn-outline-primary btn-lg">
+                View My Requests
+            </a>
+        }
+        else
+        {
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary btn-lg me-2">
+                Login to Create Ticket
+            </a>
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-primary btn-lg">
+                Login to View Requests
+            </a>
+        }
+    </section>
+
+    <!-- Services / Assistance Section -->
+    <section class="mb-5">
+        <div class="row g-4 justify-content-center">
+            <div class="col-6 col-md-3 text-center">
+                <div class="p-4 rounded service-card h-100">
+                    <span class="material-symbols-rounded fs-1 text-primary mb-2">build</span>
+                    <h5 class="fw-semibold mb-1">Tool Access</h5>
+                    <p class="text-muted fs-7">Request access to IT tools and resources.</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 text-center">
+                <div class="p-4 rounded service-card h-100">
+                    <span class="material-symbols-rounded fs-1 text-success mb-2">computer</span>
+                    <h5 class="fw-semibold mb-1">Equipment</h5>
+                    <p class="text-muted fs-7">Request laptops, monitors, and other hardware.</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 text-center">
+                <div class="p-4 rounded service-card h-100">
+                    <span class="material-symbols-rounded fs-1 text-warning mb-2">bug_report</span>
+                    <h5 class="fw-semibold mb-1">Software Troubleshoot</h5>
+                    <p class="text-muted fs-7">Get help fixing software and application issues.</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3 text-center">
+                <div class="p-4 rounded service-card h-100">
+                    <span class="material-symbols-rounded fs-1 text-secondary mb-2">support_agent</span>
+                    <h5 class="fw-semibold mb-1">IT Support</h5>
+                    <p class="text-muted fs-7">General assistance and troubleshooting guidance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard / Quick Links -->
+    <div class="row g-4">
+        <!-- New Ticket -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100 dashboard-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="material-symbols-rounded fs-2 text-primary me-2">add_circle</span>
+                        <h5 class="card-title mb-0">New Ticket</h5>
+                    </div>
+                    <p class="card-text text-muted">Log a new IT issue or request support.</p>
+
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <a asp-controller="Tickets" asp-action="Create" class="btn btn-primary btn-sm w-100">
+                            Create Ticket
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary btn-sm w-100">
+                            Login to Create
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- My Requests -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100 dashboard-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="material-symbols-rounded fs-2 text-success me-2">article</span>
+                        <h5 class="card-title mb-0">My Requests</h5>
+                    </div>
+                    <p class="card-text text-muted">View and track your submitted tickets.</p>
+
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <a asp-controller="Tickets" asp-action="Index" class="btn btn-outline-success btn-sm w-100">
+                            View Requests
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-success btn-sm w-100">
+                            Login to View
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Request History -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100 dashboard-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="material-symbols-rounded fs-2 text-warning me-2">history</span>
+                        <h5 class="card-title mb-0">History</h5>
+                    </div>
+                    <p class="card-text text-muted">Review resolved and closed tickets.</p>
+
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <a asp-controller="Tickets" asp-action="History" class="btn btn-outline-warning btn-sm w-100">
+                            View History
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-warning btn-sm w-100">
+                            Login to View
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Help / Info -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm h-100 dashboard-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="material-symbols-rounded fs-2 text-secondary me-2">help</span>
+                        <h5 class="card-title mb-0">Need Help?</h5>
+                    </div>
+                    <p class="card-text text-muted">Common issues, guidelines, and support info.</p>
+                    <a href="#" class="btn btn-outline-secondary btn-sm w-100 disabled">Coming Soon</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

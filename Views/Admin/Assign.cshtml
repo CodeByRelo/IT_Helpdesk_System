@@ -1,0 +1,27 @@
+﻿
+@model IT_Helpdesk_System.Models.Ticket
+@{
+    ViewData["Title"] = "Assign Ticket";
+}
+
+<h2>Assign Ticket: @Model.Title</h2>
+
+<form asp-action="Assign" method="post">
+    <input type="hidden" asp-for="TicketId" />
+    <div class="mb-3">
+        <label class="form-label">Assign To</label>
+        <select class="form-select" name="assignedToId" required>
+            <option value="">-- Select Admin --</option>
+            @foreach (var admin in ViewBag.Admins)
+            {
+                <option value="@admin.Id" selected="@(Model.AssignedToId == admin.Id ? "selected" : null)">
+                    @admin.FullName
+                </option>
+
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Assign Ticket</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+</form>

@@ -1,0 +1,62 @@
+﻿@model IT_Helpdesk_System.Models.Ticket
+
+@{
+    ViewData["Title"] = "Edit Request";
+}
+
+<div class="container-fluid">
+    <h1 class="mb-3 text-center fw-semibold">Edit Request</h1>
+    <h5 class="text-muted text-center mb-4">Update ticket details below</h5>
+    <hr />
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <form asp-action="Edit" class="shadow-sm p-4 rounded bg-white">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <input type="hidden" asp-for="TicketId" />
+                <input type="hidden" asp-for="CreatedAt" />
+                <input type="hidden" asp-for="UpdatedAt" />
+
+                <!-- Title -->
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label fw-semibold"></label>
+                    <input asp-for="Title" class="form-control form-control-lg" placeholder="Enter ticket title" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label fw-semibold"></label>
+                    <textarea asp-for="Description" class="form-control form-control-lg" rows="4" placeholder="Describe the issue"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <!-- Status Dropdown -->
+                <div class="mb-4">
+                    <label asp-for="Status" class="form-label fw-semibold"></label>
+                    <select asp-for="Status" class="form-select form-select-lg"
+                            asp-items="@(new SelectList(new List<string> { "Open", "In Progress", "Closed" }, Model.Status))">
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+
+                <!-- Submit -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <span class="material-symbols-rounded me-1">arrow_back</span> Back
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="material-symbols-rounded me-1">save</span> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
